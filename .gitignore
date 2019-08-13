@@ -1,6 +1,6 @@
 # dependencies
 /node_modules
-/.next
+/src/.next
 /.pnp
 .pnp.js
 
