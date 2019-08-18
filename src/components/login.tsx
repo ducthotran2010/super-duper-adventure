@@ -9,8 +9,8 @@ export const LOGIN = gql`
 `;
 
 export default function Login() {
-  const [name, setName] = useState<string>('Administrator');
-  const [email, setEmail] = useState<string>('admin@gmail.com');
+  const [name, setName] = useState<string>('DukeThor');
+  const [email, setEmail] = useState<string>('thorthor@thor.thor');
   const [handleLogin, { loading, error }] = useMutation(LOGIN, {
     variables: {
       name,
@@ -25,9 +25,8 @@ export default function Login() {
     return <p>An error occurred</p>;
   }
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = e => {
     e.preventDefault();
-    console.log('handle login void trigged');
     handleLogin();
   };
 

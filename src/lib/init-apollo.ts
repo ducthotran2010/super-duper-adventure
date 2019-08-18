@@ -8,6 +8,12 @@ function create(initialState) {
   const isBrowser = typeof window !== 'undefined';
   const cache = new InMemoryCache().restore(initialState || {});
 
+  cache.writeData({
+    data: {
+      me: null,
+    },
+  });
+
   return new ApolloClient({
     connectToDevTools: isBrowser,
     ssrMode: !isBrowser,

@@ -2,10 +2,10 @@ import { useMutation, useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { isNil } from 'lodash';
 import React from 'react';
-import Login from './login';
+import Login from '../components/login';
 
 export const GET_INFO = gql`
-  query getInfo {
+  query {
     me @client {
       name
       email
@@ -21,11 +21,11 @@ const LOGOUT = gql`
 
 const HomePage = () => {
   const { data } = useQuery(GET_INFO);
+  const [handleLogout, { loading, error }] = useMutation(LOGOUT, {});
+
   if (!(!isNil(data) && !isNil(data.me))) {
     return <Login />;
   }
-
-  const [handleLogout, { loading, error }] = useMutation(LOGOUT, {});
 
   if (loading) {
     return <p>Loading...</p>;
@@ -40,12 +40,7 @@ const HomePage = () => {
       <h1>
         Hi {name}({email})!
       </h1>
-      <button
-        onClick={() => {
-          console.log('invoked');
-          handleLogout();
-        }}
-      >
+      <button autoFocus onClick={() => handleLogout()}>
         Logout
       </button>
     </>
